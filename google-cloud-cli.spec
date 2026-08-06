@@ -7,7 +7,7 @@
 
 Name:		google-cloud-cli
 Version:	579.0.0
-Release:	3
+Release:	4
 Summary:	Command-line tools for Google Cloud Platform
 License:	Apache-2.0
 Group:		Development/Other
@@ -21,16 +21,70 @@ Source2:	google-cloud-cli.rpmlintrc
 
 BuildArch:	noarch
 BuildRequires:	python
-# %check exercises gcloud with site-packages
+# Same stack as Requires — needed for %%check (unvendored imports)
 BuildRequires:	python%{pyver}dist(urllib3)
 BuildRequires:	python%{pyver}dist(requests)
-BuildRequires:	python%{pyver}dist(pyopenssl)
+BuildRequires:	python%{pyver}dist(certifi)
+BuildRequires:	python%{pyver}dist(idna)
+BuildRequires:	python%{pyver}dist(charset-normalizer)
+BuildRequires:	python%{pyver}dist(chardet)
 BuildRequires:	python%{pyver}dist(cryptography)
+BuildRequires:	python%{pyver}dist(pyopenssl)
+BuildRequires:	python%{pyver}dist(cffi)
+BuildRequires:	python%{pyver}dist(pycparser)
+BuildRequires:	python%{pyver}dist(botocore)
+BuildRequires:	python%{pyver}dist(boto3)
+BuildRequires:	python%{pyver}dist(s3transfer)
+BuildRequires:	python%{pyver}dist(jmespath)
+BuildRequires:	python%{pyver}dist(google-auth)
+BuildRequires:	python%{pyver}dist(google-auth-oauthlib)
+BuildRequires:	python%{pyver}dist(google-auth-httplib2)
+BuildRequires:	python%{pyver}dist(requests-oauthlib)
+BuildRequires:	python%{pyver}dist(oauthlib)
+BuildRequires:	python%{pyver}dist(oauth2client)
+BuildRequires:	python%{pyver}dist(rsa)
+BuildRequires:	python%{pyver}dist(pyasn1)
+BuildRequires:	python%{pyver}dist(pyasn1-modules)
+BuildRequires:	python%{pyver}dist(httplib2)
+BuildRequires:	python%{pyver}dist(uritemplate)
+BuildRequires:	python%{pyver}dist(google-api-python-client)
+BuildRequires:	python%{pyver}dist(argcomplete)
+BuildRequires:	python%{pyver}dist(attrs)
+BuildRequires:	python%{pyver}dist(cachetools)
+BuildRequires:	python%{pyver}dist(python-dateutil)
+BuildRequires:	python%{pyver}dist(dnspython)
+BuildRequires:	python%{pyver}dist(python-dotenv)
+BuildRequires:	python%{pyver}dist(dulwich)
+BuildRequires:	python%{pyver}dist(jsonschema)
+BuildRequires:	python%{pyver}dist(mako)
+BuildRequires:	python%{pyver}dist(markupsafe)
+BuildRequires:	python%{pyver}dist(packaging)
+BuildRequires:	python%{pyver}dist(prompt-toolkit)
+BuildRequires:	python%{pyver}dist(pygments)
+BuildRequires:	python%{pyver}dist(pyparsing)
+BuildRequires:	python%{pyver}dist(pytz)
+BuildRequires:	python%{pyver}dist(six)
+BuildRequires:	python%{pyver}dist(wcwidth)
+BuildRequires:	python%{pyver}dist(websocket-client)
+BuildRequires:	python%{pyver}dist(pyyaml)
+BuildRequires:	python%{pyver}dist(fasteners)
+BuildRequires:	python%{pyver}dist(cattrs)
+BuildRequires:	python%{pyver}dist(docker)
+BuildRequires:	python%{pyver}dist(sqlparse)
+BuildRequires:	python%{pyver}dist(crcmod)
+BuildRequires:	python%{pyver}dist(monotonic)
+BuildRequires:	python%{pyver}dist(protobuf)
+BuildRequires:	python%{pyver}dist(tabulate)
+BuildRequires:	python%{pyver}dist(ply)
+BuildRequires:	python%{pyver}dist(appdirs)
+BuildRequires:	python%{pyver}dist(termcolor)
+BuildRequires:	python%{pyver}dist(typing-extensions)
+BuildRequires:	python%{pyver}dist(wrapt)
+BuildRequires:	python%{pyver}dist(mock)
 
 Requires:	python >= 3.10
-
-# --- System Python modules replacing Google's vendored third_party ---
-# HTTP / TLS stack
+# System modules replacing Google's vendored third_party
+# (ruamel stays vendored: system ruamel.yaml dropped yaml.load() gcloud uses)
 Requires:	python%{pyver}dist(urllib3)
 Requires:	python%{pyver}dist(requests)
 Requires:	python%{pyver}dist(certifi)
@@ -41,12 +95,10 @@ Requires:	python%{pyver}dist(cryptography)
 Requires:	python%{pyver}dist(pyopenssl)
 Requires:	python%{pyver}dist(cffi)
 Requires:	python%{pyver}dist(pycparser)
-# AWS transfer path (gcloud transfer / storage extras → boto3)
 Requires:	python%{pyver}dist(botocore)
 Requires:	python%{pyver}dist(boto3)
 Requires:	python%{pyver}dist(s3transfer)
 Requires:	python%{pyver}dist(jmespath)
-# Auth / OAuth (top-level modules; google.auth itself stays in vendored google/)
 Requires:	python%{pyver}dist(google-auth)
 Requires:	python%{pyver}dist(google-auth-oauthlib)
 Requires:	python%{pyver}dist(google-auth-httplib2)
@@ -59,7 +111,6 @@ Requires:	python%{pyver}dist(pyasn1-modules)
 Requires:	python%{pyver}dist(httplib2)
 Requires:	python%{pyver}dist(uritemplate)
 Requires:	python%{pyver}dist(google-api-python-client)
-# Common libraries
 Requires:	python%{pyver}dist(argcomplete)
 Requires:	python%{pyver}dist(attrs)
 Requires:	python%{pyver}dist(cachetools)
@@ -79,7 +130,6 @@ Requires:	python%{pyver}dist(six)
 Requires:	python%{pyver}dist(wcwidth)
 Requires:	python%{pyver}dist(websocket-client)
 Requires:	python%{pyver}dist(pyyaml)
-# ruamel stays vendored: system ruamel.yaml dropped the yaml.load() API gcloud uses
 Requires:	python%{pyver}dist(fasteners)
 Requires:	python%{pyver}dist(cattrs)
 Requires:	python%{pyver}dist(docker)
