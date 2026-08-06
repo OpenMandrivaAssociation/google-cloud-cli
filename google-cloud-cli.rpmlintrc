@@ -1,0 +1,16 @@
+# Google's packager tree is full of non-executable modules with shebangs,
+# zero-byte placeholders, and nested third_party copies. That is upstream
+# layout noise, not packaging mistakes.
+from Config import *
+
+addFilter("non-executable-script")
+addFilter("zero-length")
+addFilter("script-without-shebang")
+addFilter("incorrect-fsf-address")
+addFilter("wrong-script-interpreter")
+addFilter("files-duplicated-waste")
+addFilter("files-duplicate")
+addFilter("devel-file-in-non-devel-package")
+addFilter("no-dependency-on")
+addFilter("hidden-file-or-dir")
+addFilter("no-manual-page-for-binary")
