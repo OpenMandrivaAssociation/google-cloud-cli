@@ -6,8 +6,8 @@
 # are removed so the system copies are used.
 
 Name:		google-cloud-cli
-Version:	579.0.0
-Release:	4
+Version:	589.0.0
+Release:	1
 Summary:	Command-line tools for Google Cloud Platform
 License:	Apache-2.0
 Group:		Development/Other
